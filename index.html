@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidemony</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hidemony</h1>
+        <p class="subtitle">Encode a message into a Spotify playlist or decode a message from a playlist.</p>
+
+        <div class="section">
+            <button id="loginButton">Login to Spotify</button>
+        </div>
+
+        <div class="section">
+            <div class="switch-bar">
+                <button id="encodeMode" class="mode-button active">Encode</button>
+                <button id="decodeMode" class="mode-button">Decode</button>
+            </div>
+
+            <div id="encodeForm">
+                <h2>Encode a Message</h2>
+                <textarea id="encodeMessage" placeholder="Enter your message here..."></textarea>
+                <p class="note">Maximum message length: 999 characters. </p>
+                <button id="encodeButton">Generate Playlist</button>
+
+                <div id="encodeResult" class="result">
+                    <h3>Generated Playlist</h3>
+                    <ul id="playlistOutput"></ul>
+                    <button id="exportTxtButton">Export as .txt</button>
+                </div>
+            </div>
+
+            <div id="decodeForm" class="hidden">
+                <h2>Decode a Message</h2>
+                <input type="text" id="playlistLink" placeholder="Enter Spotify playlist link...">
+                <p class="note">Or upload a playlist file below:</p>
+                <input type="file" id="uploadPlaylist" accept=".txt">
+                <textarea id="decodePlaylist" placeholder="Playlist will appear here..."></textarea>
+                <button id="decodeButton">Decode Message</button>
+
+                <div id="decodeResult" class="result">
+                    <h3>Decoded Message</h3>
+                    <p id="decodedMessage"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay">
+        <div id="spinner" class="spinner"></div>
+    </div>
+</body>
+</html>
