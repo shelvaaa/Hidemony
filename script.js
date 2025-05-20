@@ -1,3 +1,4 @@
+/*Made by Shelva Nur Fatimah*/
 const CLIENT_ID = '263cabb9b97c43d593140ffdc085c4e1';
 const CLIENT_SECRET = 'e1b99c46557242479b1819443bdf1a3a';
 const REDIRECT_URI = 'http://127.0.0.1:5500/index.html';
