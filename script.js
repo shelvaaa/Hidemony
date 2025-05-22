@@ -1,4 +1,5 @@
-/*Made by Shelva Nur Fatimah*/
+/*Made By Shelva Nur Fatimah*/
+
 const CLIENT_ID = '263cabb9b97c43d593140ffdc085c4e1';
 const CLIENT_SECRET = 'e1b99c46557242479b1819443bdf1a3a';
 const REDIRECT_URI = 'http://127.0.0.1:5500/index.html';
@@ -181,6 +182,8 @@ async function encodeMessage() {
     }
 
     const digitToLetter = 'ABCDEFGHIJ'; // 0-9 mapped to A-J
+    const charMapping = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p']; // 4 bits: 0000 to 1111
+    const bitsPerSong = 4;
     let playlist = [];
     let trackUris = [];
     usedUris.clear();
@@ -223,19 +226,16 @@ async function encodeMessage() {
         }
         console.log(`Original binary: ${binary}`);
 
-        // Encode binary using 2 bits per song
-        const bitsPerSong = 2;
+        // Encode binary using 4 bits per song
         const requiredSongs = Math.ceil(binary.length / bitsPerSong);
         const paddingLength = (bitsPerSong - (binary.length % bitsPerSong)) % bitsPerSong;
         binary += '0'.repeat(paddingLength);
 
-        const charMapping = ['a', 'b', 'c', 'd']; // a=00, b=01, c=10, d=11
         for (let i = 0; i < binary.length; i += bitsPerSong) {
             const bits = binary.slice(i, i + bitsPerSong).padEnd(bitsPerSong, '0');
-            const index = parseInt(bits, 2);
+            const index = parseInt(bits, 2); // 0-15
             const char = charMapping[index];
             console.log(`Encoding bits: ${bits}, Index: ${index}, Char: ${char}`);
-
             const song = await searchSongForCharacter(char);
             playlist.push(`${song.artist} - ${song.song}`);
             trackUris.push(song.uri);
@@ -430,8 +430,8 @@ function decodePlaylist(playlist) {
     }
 
     const digitToLetter = 'ABCDEFGHIJ';
-    const bitsPerSong = 2;
-    const charMapping = ['a', 'b', 'c', 'd']; // a=00, b=01, c=10, d=11
+    const charMapping = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p'];
+    const bitsPerSong = 4;
 
     // Decode message length from first three songs
     const lengthSong1 = playlist[0].split(' - ')[0];
